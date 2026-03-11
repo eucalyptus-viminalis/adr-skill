@@ -1,5 +1,8 @@
 # ADR Skill
 
+recommended prerequisites:
+- `git`
+
 > Architectural Decision Records
 
 Follow the ADR template found in `references`. Once a decision has been accepted, don't edit them;
