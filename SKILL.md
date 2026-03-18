@@ -5,7 +5,9 @@ recommended prerequisites:
 
 > Architectural Decision Records
 
-Follow the ADR template found in `references`.
+Use the ADR template found in `references`.
+
+ADR file naming: prefix with an incrementing 3 digit number. e.g. 001-<topic>.md
 
 - create ADRs whenever there is an architectural or design decision to be made
 - update ADRs in-place as its status changes
