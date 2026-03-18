@@ -5,12 +5,19 @@ recommended prerequisites:
 
 > Architectural Decision Records
 
-Follow the ADR template found in `references`. Once a decision has been accepted, don't edit them;
-supersede them with a new ADR.
+Follow the ADR template found in `references`.
 
-Reports and decision records are updated in place rather than versioned as separate files. 
-Each document has a provenance section with commit hashes that trace its history. 
-Use git log <file> to see when and why a document changed.
+- create ADRs whenever there is an architectural or design decision to be made
+- update ADRs in-place as its status changes
+- keep a provenance section that references commit hashes to trace history.
+- use git log <file> to see when and why an adr changed.
+- after an ADR is accepted, or decided, graduate them into specs for building
+- only record an ADR as implemented, or complete, after it has been applied to source code
 
-
+typical ADR status: 
+- idea | design | proposed
+- pending | deferred
+- accepted | decided
+- implemented | complete
+- deprecated
 
