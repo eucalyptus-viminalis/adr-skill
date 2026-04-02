@@ -4,11 +4,15 @@ Create and maintain Architecture Decision Records (ADRs) with clear status trans
 
 ## Install
 
-Run this in Codex terminal:
+> prereq: a machine with Codex installed
+
+Run this in any terminal:
 
 ```bash
 python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-installer/scripts/install-skill-from-github.py" \
-  --url "https://github.com/eucalyptus-viminalis/adr-skill/tree/main/adr-skill"
+  --repo "eucalyptus-viminalis/adr-skill" \
+  --path . \
+  --name adr
 ```
 
 Then restart Codex to load the new skill.
