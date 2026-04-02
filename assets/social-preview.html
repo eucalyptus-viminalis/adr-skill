@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADR Skill Social Preview</title>
+    <style>
+      :root {
+        --bg: #0e1117;
+        --bg-soft: #141922;
+        --panel: rgba(24, 28, 36, 0.94);
+        --line: rgba(255, 255, 255, 0.08);
+        --line-soft: rgba(255, 255, 255, 0.04);
+        --text: #f3f2ee;
+        --muted: rgba(243, 242, 238, 0.68);
+        --accent: #8aa4ff;
+        --safe: 48px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+
+      body {
+        position: relative;
+        background:
+          radial-gradient(900px 480px at 85% 12%, rgba(138, 164, 255, 0.12), transparent 60%),
+          radial-gradient(760px 420px at 18% 88%, rgba(255, 255, 255, 0.05), transparent 68%),
+          linear-gradient(180deg, #10141b 0%, var(--bg) 100%);
+        color: var(--text);
+        font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border: 1px solid var(--line-soft);
+        border-radius: 22px;
+        pointer-events: none;
+      }
+
+      body::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 120px 120px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.52), transparent 88%);
+        opacity: 0.24;
+        pointer-events: none;
+      }
+
+      .safe {
+        position: absolute;
+        inset: var(--safe);
+      }
+
+      .label {
+        margin: 0 0 22px;
+        color: var(--muted);
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .brand {
+        position: absolute;
+        left: var(--safe);
+        top: 44px;
+        width: 560px;
+        z-index: 2;
+      }
+
+      .brand-mark {
+        margin: 0;
+        font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+        font-size: 164px;
+        line-height: 0.82;
+        letter-spacing: -0.08em;
+        font-weight: 700;
+      }
+
+      .brand-title {
+        margin: 10px 0 0;
+        max-width: 520px;
+        font-size: 52px;
+        line-height: 0.96;
+        letter-spacing: -0.03em;
+        font-weight: 650;
+      }
+
+      .brand-copy {
+        margin: 22px 0 0;
+        max-width: 520px;
+        color: rgba(243, 242, 238, 0.8);
+        font-size: 30px;
+        line-height: 1.2;
+      }
+
+      .keywords {
+        position: absolute;
+        top: 58px;
+        right: 44px;
+        width: 470px;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .kw {
+        margin: 0;
+        text-align: right;
+        font-family: "Avenir Next Condensed", "Helvetica Neue", sans-serif;
+        font-weight: 700;
+        line-height: 0.92;
+        letter-spacing: -0.03em;
+        text-transform: lowercase;
+      }
+
+      .kw-outline {
+        color: transparent;
+        -webkit-text-stroke: 1.2px rgba(210, 220, 255, 0.2);
+      }
+
+      .kw-fill {
+        color: rgba(235, 238, 246, 0.2);
+      }
+
+      .kw-1 {
+        font-size: 72px;
+        transform: translateX(10px);
+      }
+
+      .kw-2 {
+        margin-top: 22px;
+        font-size: 58px;
+        transform: translateX(-12px);
+      }
+
+      .kw-3 {
+        margin-top: 18px;
+        font-size: 68px;
+        transform: translateX(18px);
+      }
+
+      .kw-4 {
+        margin-top: 20px;
+        font-size: 60px;
+        transform: translateX(-28px);
+      }
+
+      .composer {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        left: var(--safe);
+        right: var(--safe);
+        bottom: 42px;
+        height: 138px;
+        padding: 20px 22px 18px;
+        border-radius: 26px;
+        background: linear-gradient(180deg, rgba(29, 33, 41, 0.98), rgba(24, 28, 35, 0.97));
+        border: 1px solid var(--line);
+        box-shadow:
+          0 18px 44px rgba(0, 0, 0, 0.28),
+          inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        z-index: 3;
+      }
+
+      .prompt {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0;
+        font-size: 45px;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+        color: rgba(246, 245, 241, 0.98);
+        white-space: nowrap;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        padding: 0 13px;
+        border-radius: 999px;
+        background: rgba(138, 164, 255, 0.1);
+        border: 1px solid rgba(138, 164, 255, 0.34);
+        color: #b8c8ff;
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      .controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .controls-left,
+      .controls-right {
+        display: flex;
+        align-items: center;
+      }
+
+      .controls-left {
+        gap: 12px;
+      }
+
+      .controls-right {
+        gap: 10px;
+      }
+
+      .icon-button,
+      .meta-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 42px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.02);
+        color: rgba(243, 242, 238, 0.72);
+      }
+
+      .icon-button {
+        width: 42px;
+        padding: 0;
+      }
+
+      .icon-button svg {
+        width: 26px;
+        height: 26px;
+      }
+
+      .meta-button {
+        gap: 8px;
+        padding: 0 13px;
+      }
+
+      .meta {
+        margin: 0;
+        display: inline-flex;
+        align-items: center;
+        color: rgba(243, 242, 238, 0.58);
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        line-height: 1;
+      }
+
+      .icon {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .caret {
+        width: 10px;
+        height: 6px;
+        color: rgba(243, 242, 238, 0.28);
+      }
+
+      .send {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: rgba(248, 247, 243, 0.98);
+        color: #12161d;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+      }
+
+      .send svg {
+        width: 32px;
+        height: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="brand">
+      <p class="label">Agent Skill</p>
+      <h1 class="brand-mark">ADR</h1>
+      <p class="brand-title">Architecture Decision Records</p>
+      <p class="brand-copy">Record the hard calls before they turn into expensive regrets.</p>
+    </section>
+
+    <section class="keywords" aria-hidden="true">
+      <p class="kw kw-outline kw-1">storage format</p>
+      <p class="kw kw-fill kw-2">auth model</p>
+      <p class="kw kw-outline kw-3">api design</p>
+      <p class="kw kw-fill kw-4">migration plan</p>
+    </section>
+
+    <section class="composer" aria-label="AI chat usage mockup">
+      <p class="prompt">create an <span class="pill">$adr</span> for postgres migration</p>
+      <div class="controls">
+        <div class="controls-left">
+          <span class="icon-button" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 16 16">
+              <path d="M8 3.25v9.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+              <path d="M3.25 8h9.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+            </svg>
+          </span>
+          <span class="meta-button">
+            <span class="meta">GPT-5.3-Codex</span>
+            <svg class="caret" viewBox="0 0 10 6" aria-hidden="true">
+              <path class="icon" d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+            </svg>
+          </span>
+          <span class="meta-button">
+            <span class="meta">Medium</span>
+            <svg class="caret" viewBox="0 0 10 6" aria-hidden="true">
+              <path class="icon" d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+            </svg>
+          </span>
+        </div>
+        <div class="controls-right">
+          <span class="send" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 16 16">
+              <path d="M8 11.75V4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"></path>
+              <path d="M5.5 7l2.5-2.5L10.5 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

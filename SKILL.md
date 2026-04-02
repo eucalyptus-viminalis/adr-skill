@@ -1,3 +1,8 @@
+---
+name: adr
+description: Create and maintain Architecture Decision Records (ADRs), including statuses, provenance, and naming conventions. Use when making or updating architectural/design decisions.
+---
+
 # ADR Skill
 
 recommended prerequisites:
@@ -22,4 +27,3 @@ typical ADR status:
 - accepted | decided
 - implemented | complete
 - deprecated
-
