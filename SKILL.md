@@ -12,6 +12,8 @@ recommended prerequisites:
 
 Use the ADR template found in `references`.
 
+Store ADRs in `docs/adr/`. Create that directory if it does not exist yet.
+
 ADR file naming: prefix with an incrementing 3 digit number. e.g. 001-<topic>.md
 
 - create ADRs whenever there is an architectural or design decision to be made
